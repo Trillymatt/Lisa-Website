@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+/*
+  Brand palette for Above All Else Counseling and Wellness Center.
+  Calm, peaceful, welcoming, faith-inspired (non-denominational).
+  TODO: Swap these hex values once the official brand colors are confirmed.
+*/
+@theme {
+  --font-display: var(--font-display), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+
+  /* Sage green — growth, calm, healing */
+  --color-sage-50: #f4f7f1;
+  --color-sage-100: #e6eddf;
+  --color-sage-200: #cedcc1;
+  --color-sage-300: #aec39b;
+  --color-sage-400: #8aa674;
+  --color-sage-500: #6c8c57;
+  --color-sage-600: #547043;
+  --color-sage-700: #425836;
+  --color-sage-800: #37482e;
+  --color-sage-900: #2e3c28;
+
+  /* Ocean blue — peace, trust, depth */
+  --color-ocean-50: #eef4f7;
+  --color-ocean-100: #d6e6ee;
+  --color-ocean-200: #aecedd;
+  --color-ocean-300: #7fb0c7;
+  --color-ocean-400: #5690ac;
+  --color-ocean-500: #437a96;
+  --color-ocean-600: #38647c;
+  --color-ocean-700: #325466;
+  --color-ocean-800: #2e4757;
+  --color-ocean-900: #2a3c49;
+
+  /* Warm sand — softness, comfort */
+  --color-sand-50: #faf7f1;
+  --color-sand-100: #f4ece0;
+  --color-sand-200: #ead9c4;
+  --color-sand-300: #ddc09f;
+
+  /* Gold — gentle, faith-inspired accent */
+  --color-gold-400: #d4b574;
+  --color-gold-500: #c39e54;
+}
+
+:root {
+  --background: #faf8f3;
+  --foreground: #2e3c28;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Smooth in-page anchor scrolling for nav links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ---------------------------------------------------------------------------
+   Motion + surfaces
+   A small, dependency-free animation system. Sections fade and rise into view
+   as they're scrolled to (see <Reveal>), the hero settles in on load, and
+   cards lift gently on hover. Everything is disabled under
+   prefers-reduced-motion so the site stays calm and accessible.
+--------------------------------------------------------------------------- */
+
+/* Softer, layered shadow used by content cards instead of a flat box. */
+.shadow-soft {
+  box-shadow:
+    0 1px 2px rgba(46, 60, 40, 0.04),
+    0 18px 40px -24px rgba(46, 60, 40, 0.22);
+}
+
+/* Scroll-reveal: hidden until the <Reveal> wrapper marks it visible. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* On-load entrance for above-the-fold hero content. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-rise {
+  animation: rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Slow drift for the decorative hero accents. */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-18px) translateX(10px);
+  }
+}
+.animate-float {
+  animation: float-slow 14s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-rise,
+  .animate-float {
+    animation: none;
+  }
+}
