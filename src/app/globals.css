@@ -103,6 +103,55 @@ html {
   animation: rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* ---------------------------------------------------------------------------
+   Hero value band: a thin, slowly scrolling "Mind • Body • Spirit" strip.
+   Two identical groups sit side by side; the track translates exactly one
+   group width (-50%) and loops, so the seam is invisible. Soft edge mask keeps
+   it subtle. Under reduced motion it stops and shows a single centered copy.
+--------------------------------------------------------------------------- */
+.value-band {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+}
+.value-band__track {
+  animation: value-marquee 32s linear infinite;
+}
+.value-band__word {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(244, 247, 241, 0.75); /* sage-50 @ ~75%, for the video scrim */
+}
+/* Darker words for the light gradient fallback (no video). */
+.value-band--dark .value-band__word {
+  color: rgba(66, 88, 54, 0.7); /* sage-700 @ ~70% */
+}
+.value-band__dot {
+  margin: 0 1.75rem;
+  color: var(--color-gold-400);
+}
+@keyframes value-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /* Slow drift for the decorative hero accents. */
 @keyframes float-slow {
   0%,
@@ -129,5 +178,14 @@ html {
   .animate-rise,
   .animate-float {
     animation: none;
+  }
+  /* Stop the marquee and show a single, centered Mind • Body • Spirit. */
+  .value-band__track {
+    animation: none;
+    width: 100%;
+    justify-content: center;
+  }
+  .value-band__dup {
+    display: none;
   }
 }

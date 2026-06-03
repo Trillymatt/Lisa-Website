@@ -1,56 +1,14 @@
 import Link from "next/link";
 import { CtaButton } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
+import { Hero } from "@/components/hero";
 import { goals, services, testimonials, values } from "@/lib/content";
 
 export default function Home() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-sage-100 via-sage-50 to-sand-50">
-        {/* Soft, slowly drifting accents for a little life behind the words. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-sage-200/40 blur-3xl animate-float"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-32 right-[-6rem] h-80 w-80 rounded-full bg-ocean-100/50 blur-3xl animate-float"
-          style={{ animationDelay: "-7s" }}
-        />
-
-        <div className="relative mx-auto max-w-5xl px-5 py-24 text-center sm:px-8 sm:py-32">
-          <p
-            className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-sage-500 animate-rise"
-            style={{ animationDelay: "0.05s" }}
-          >
-            Faith-Inspired Counseling &amp; Wellness
-          </p>
-          <h1
-            className="font-display text-5xl font-semibold leading-tight tracking-tight text-ocean-800 animate-rise sm:text-6xl"
-            style={{ animationDelay: "0.15s" }}
-          >
-            You don&rsquo;t have to carry it all alone
-          </h1>
-          <p
-            className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-sage-700 animate-rise sm:text-xl"
-            style={{ animationDelay: "0.28s" }}
-          >
-            Whatever you&rsquo;re going through, there&rsquo;s a seat here for
-            you. I listen without judgment, take your faith as seriously as you
-            do, and help you find your footing again, one session at a time.
-          </p>
-          <div
-            className="mt-10 flex flex-col items-center justify-center gap-4 animate-rise sm:flex-row"
-            style={{ animationDelay: "0.4s" }}
-          >
-            <CtaButton href="/schedule">Book a Session</CtaButton>
-            <CtaButton href="/services" variant="secondary">
-              View Services &amp; Pricing
-            </CtaButton>
-          </div>
-        </div>
-      </section>
+      {/* Hero (full-bleed photo background — see Hero) */}
+      <Hero />
 
       {/* Goals / promise — a single calm checklist instead of scattered boxes. */}
       <section className="mx-auto max-w-3xl px-5 py-20 sm:px-8">

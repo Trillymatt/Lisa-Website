@@ -22,11 +22,11 @@ const body = Nunito_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} | Faith-Inspired Counseling & Wellness`,
+    default: `${site.name} | Counseling for Mind, Body & Spirit`,
     template: `%s | ${site.shortName}`,
   },
   description:
-    "Above All Else Counseling and Wellness Center offers calm, welcoming, faith-inspired counseling for individuals, couples, and families. Clear pricing and easy online scheduling.",
+    "Above All Else Counseling and Wellness Center offers calm, compassionate counseling for individuals, couples, and families in Lewisville, TX. Clear pricing and easy online scheduling.",
 };
 
 export default function RootLayout({

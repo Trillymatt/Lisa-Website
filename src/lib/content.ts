@@ -26,8 +26,10 @@ export const site = {
   // This is a solo practice — one counselor. Used in the about-page signature
   // and anywhere the site speaks in a personal voice.
   practitioner: {
-    name: "Lisa", // TODO confirm full name
-    credentials: "Licensed Counselor", // TODO confirm license / credentials
+    name: "Lisa Jefferson Norman",
+    // M.A. in Marriage & Family Therapy (per bio). TODO: add a state license
+    // (e.g. LMFT) here if/when one should be shown publicly.
+    credentials: "M.A., Marriage & Family Therapy",
   },
 } as const;
 
@@ -118,6 +120,34 @@ export const testimonials: Testimonial[] = [
     attribution: "Wellness coaching client",
   },
 ];
+
+/**
+ * About-page content for Lisa, in her own (third-person) voice. Faith language
+ * lives here intentionally — the homepage leads clinical, while the About page
+ * is where Lisa's faith-inspired story is told in full.
+ */
+export const about = {
+  /** Lisa's tagline. */
+  heartline: "Because caring for your heart is most important.",
+  /** The practice mission statement. */
+  mission:
+    "Above All Else Counseling and Wellness Center exists to empower individuals, families, and communities to advance in mind, body, and spirit. Through professional counseling rooted in faith and compassion, we create a safe space for each person to grow.",
+  /** Bio paragraphs. */
+  bio: [
+    "Lisa Jefferson Norman is a compassionate counselor and wellness advocate with over 15 years of experience, walking alongside individuals, couples, and families and equipping them with the tools, insight, and support they need to rise above life's greatest challenges.",
+    "Holding a Bachelor's degree in Biblical Studies and a Master's degree in Marriage and Family Therapy, Lisa brings a unique blend of clinical expertise and faith-inspired wisdom to every session. Drawn to this work through her own life, family, and relationship experiences, she has a deep calling to serve her community and a passion for bridging faith and mental health.",
+    "Lisa founded Above All Else Counseling and Wellness Center with one purpose — to help every person advance in mind, body, and spirit, and to care for the heart, which is most important. She believes that wholeness is not just possible; it is purposed — and she is honored to walk that road with you.",
+  ],
+  /** Short credentials list, shown beside the bio. */
+  credentials: [
+    "Master of Arts, Marriage & Family Therapy",
+    "Bachelor of Arts, Biblical Studies",
+    "15+ years with individuals, couples & families",
+  ],
+  /** A warm personal note. */
+  personal:
+    "Lisa lives in Lewisville, Texas, with Marcus Norman, her husband of 34 years. Together they raised three sons, and they are grandparents to two adventurous grandsons and one remarkable granddaughter.",
+} as const;
 
 export const values = [
   {
