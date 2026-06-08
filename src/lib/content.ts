@@ -11,8 +11,8 @@ export const site = {
   shortName: "Above All Else",
   tagline:
     "Counseling that cares for your heart, mind, and faith, at a pace that feels right for you.",
-  // TODO: replace with the practice's real contact details.
-  email: "hello@aboveallelse.example", // TODO
+  // TODO: replace any remaining placeholder contact details.
+  email: "Aboveallelsetherapy@lisanormantherapy.com",
   phone: "(555) 123-4567", // TODO
   phoneHref: "tel:+15551234567", // TODO
   address: "123 Wellness Way, Suite 100, Your City, ST 00000", // TODO — in-person sessions
@@ -26,17 +26,19 @@ export const site = {
   // This is a solo practice — one counselor. Used in the about-page signature
   // and anywhere the site speaks in a personal voice.
   practitioner: {
-    name: "Lisa Jefferson Norman",
-    // M.A. in Marriage & Family Therapy (per bio). TODO: add a state license
-    // (e.g. LMFT) here if/when one should be shown publicly.
-    credentials: "M.A., Marriage & Family Therapy",
+    name: "Lisa J Norman",
+    // Title shown publicly. TODO: add a state license (e.g. LMFT) here if/when
+    // one should be shown alongside the title.
+    credentials: "Counselor",
+    // Personal sign-off used on the About page.
+    signature: "I'm here to help.",
   },
 } as const;
 
 export const nav = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Services & Pricing", href: "/services" },
+  { label: "Services & Rates", href: "/services" },
   { label: "New Client Intake", href: "/intake" },
   { label: "Contact", href: "/contact" },
 ] as const;
@@ -53,47 +55,64 @@ export const goals = [
 export type Service = {
   name: string;
   description: string;
-  /** e.g. "$120 / 50-min session" — keep pricing clear and upfront. */
-  price: string;
-  duration?: string;
 };
 
-// TODO: replace with the real service list + pricing from the requirements doc.
+/**
+ * Descriptive offerings — what each kind of work feels like. Pricing lives
+ * separately in `rates` (the rate menu), so these cards stay focused on the
+ * care rather than the cost.
+ */
 export const services: Service[] = [
   {
     name: "Individual Counseling",
     description:
       "A space that's just yours. We'll work through anxiety, depression, grief, big life changes, or whatever's weighing on you, one honest conversation at a time.",
-    price: "$120",
-    duration: "50-minute session",
   },
   {
-    name: "Couples Counseling",
+    name: "Couples & Post-Marital Counseling",
     description:
       "When talking has gotten hard, I'll help you find your way back to each other. Better communication, more trust, and a little more grace for one another.",
-    price: "$150",
-    duration: "60-minute session",
   },
   {
-    name: "Family Counseling",
+    name: "Family Counseling & Conflict Resolution",
     description:
       "Families are complicated, and that's okay. I'll help everyone feel heard and work through the hard stuff together, without anyone being the problem.",
+  },
+  {
+    name: "Family Vision Casting",
+    description:
+      "A guided series to help your family name a shared direction and grow toward it together, with purpose and a plan you can keep.",
+  },
+];
+
+export type Rate = {
+  name: string;
+  /** e.g. "$150" or "Consultation required". */
+  price: string;
+  /** e.g. "per 55-minute session". Omit when the price stands on its own. */
+  detail?: string;
+};
+
+/** The service / rate menu — clear, upfront pricing in one place. */
+export const rates: Rate[] = [
+  {
+    name: "Individual Counseling",
     price: "$150",
-    duration: "60-minute session",
+    detail: "per 55-minute session",
   },
   {
-    name: "Faith-Inspired Wellness Coaching",
-    description:
-      "For when you want your faith to be part of the work. I weave in spiritual practice and whole-person wellness, only as much as you'd like.",
-    price: "$100",
-    duration: "50-minute session",
+    name: "Couples & Post-Marital Counseling",
+    price: "$175",
+    detail: "per 55-minute session",
   },
   {
-    name: "Free Introductory Call",
-    description:
-      "Not sure where to start? Let's talk for 15 minutes, no pressure. You can ask questions and see if we're the right fit before booking anything.",
-    price: "Free",
-    duration: "15 minutes",
+    name: "Family Counseling & Conflict Resolution Coaching",
+    price: "Consultation required",
+  },
+  {
+    name: "Family Vision Casting",
+    price: "$500",
+    detail: "three 55-minute sessions",
   },
 ];
 

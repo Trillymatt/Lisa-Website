@@ -14,10 +14,12 @@ export default function Home() {
       <section className="mx-auto max-w-3xl px-5 py-20 sm:px-8">
         <Reveal>
           <h2 className="text-center font-display text-3xl font-semibold text-ocean-800 sm:text-4xl">
-            No matter what brought you here
+            I&rsquo;m so glad you&rsquo;re here, because here is where healing
+            begins
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-center text-sage-700">
-            A few of the things you can do on this site.
+            At Above All Else Counseling and Wellness Center &mdash; virtual and
+            in-person sessions available.
           </p>
         </Reveal>
 
@@ -85,14 +87,14 @@ export default function Home() {
                 Ways I can help
               </h2>
               <p className="mt-3 max-w-xl text-sage-700">
-                Real support, with pricing you can see right up front.
+                Real support for wherever you are right now.
               </p>
             </div>
             <Link
               href="/services"
               className="group text-sm font-semibold text-ocean-600 transition-colors hover:text-ocean-700"
             >
-              See all services &amp; pricing{" "}
+              See services &amp; the rate menu{" "}
               <span className="inline-block transition-transform group-hover:translate-x-1">
                 &rarr;
               </span>
@@ -110,15 +112,6 @@ export default function Home() {
                   </h3>
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-sage-700">
                     {service.description}
-                  </p>
-                  <p className="mt-5 border-t border-sage-100 pt-4 text-ocean-700">
-                    <span className="text-lg font-semibold">{service.price}</span>
-                    {service.duration && (
-                      <span className="text-sm text-sage-500">
-                        {" "}
-                        &middot; {service.duration}
-                      </span>
-                    )}
                   </p>
                 </div>
               </div>
@@ -166,15 +159,14 @@ export default function Home() {
       <section className="mx-auto max-w-3xl px-5 py-20 text-center sm:px-8">
         <Reveal>
           <h2 className="font-display text-3xl font-semibold text-ocean-800 sm:text-4xl">
-            Whenever you&rsquo;re ready
+            Above all else, your well-being matters
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sage-700">
-            Maybe today, maybe next month. Start with a free 15-minute call, or
-            send me a little about yourself through the intake form. No rush, and
-            no pressure. I&rsquo;ll be here.
+            Schedule your appointment today and begin your journey. No rush, and
+            no pressure &mdash; I&rsquo;ll be here.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <CtaButton href="/schedule">Book a Session</CtaButton>
+            <CtaButton href="/schedule">Schedule Your Appointment</CtaButton>
             <CtaButton href="/intake" variant="secondary">
               New Client Intake Form
             </CtaButton>

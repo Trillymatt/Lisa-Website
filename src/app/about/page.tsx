@@ -15,7 +15,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="Meet Lisa"
         title={about.heartline}
-        subtitle="Everyone deserves a place to set things down for a while and just be heard. That's what I'm here to offer."
+        subtitle="Everyone deserves a place to share what matters and be truly heard."
       />
 
       {/* Bio + portrait + credentials */}
@@ -129,6 +129,26 @@ export default function AboutPage() {
             <p className="mx-auto mt-8 max-w-2xl leading-relaxed text-sage-700">
               {about.personal}
             </p>
+          </Reveal>
+
+          <Reveal delay={120}>
+            <div className="mx-auto mt-12 max-w-md border-t border-sage-200 pt-8">
+              <p className="font-display text-xl text-ocean-800">
+                {site.practitioner.signature}
+              </p>
+              <p className="mt-4 font-display text-lg font-semibold text-sage-800">
+                {site.practitioner.name}
+              </p>
+              <p className="text-sm text-sage-500">
+                {site.practitioner.credentials}
+              </p>
+              <a
+                href={`mailto:${site.email}`}
+                className="mt-2 inline-block break-words text-sm font-medium text-ocean-700 transition-colors hover:text-ocean-800"
+              >
+                {site.email}
+              </a>
+            </div>
           </Reveal>
         </div>
       </section>

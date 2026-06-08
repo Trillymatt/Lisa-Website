@@ -21,7 +21,7 @@ export function SiteHeader() {
             Above All Else
           </span>
           <span className="text-[0.7rem] uppercase tracking-[0.18em] text-sage-500">
-            Counseling &amp; Wellness
+            Counseling &amp; Wellness Center
           </span>
         </Link>
 

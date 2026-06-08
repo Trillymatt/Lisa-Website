@@ -100,14 +100,14 @@ export function Hero() {
           className={`mb-4 text-sm font-semibold uppercase tracking-[0.22em] animate-rise ${eyebrow}`}
           style={{ animationDelay: "0.05s" }}
         >
-          Counseling &amp; Wellness &middot; Lewisville, TX
+          Counseling &amp; Wellness Center &middot; Lewisville, TX
         </p>
 
         <h1
           className={`font-display text-5xl font-semibold leading-tight tracking-tight animate-rise sm:text-6xl ${heading}`}
           style={{ animationDelay: "0.15s" }}
         >
-          Healing for your mind, body, and spirit
+          Healing Blooms where Hope is Planted
         </h1>
 
         <p
