@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHero, CtaButton } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 import { about, values, site } from "@/lib/content";
@@ -21,20 +22,17 @@ export default function AboutPage() {
       {/* Bio + portrait + credentials */}
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
         <div className="grid gap-10 lg:grid-cols-[5fr_7fr] lg:items-start lg:gap-14">
-          {/* Portrait. TODO: drop a real photo at public/lisa.jpg and replace
-              this placeholder with:
-              <Image src="/lisa.jpg" alt="Lisa Jefferson Norman" width={640}
-                height={800} className="..." /> */}
+          {/* Portrait */}
           <Reveal>
             <figure className="mx-auto max-w-[15rem] lg:sticky lg:top-24 lg:max-w-none">
-              <div
-                aria-hidden
-                className="flex aspect-square w-full items-center justify-center overflow-hidden rounded-3xl bg-gradient-to-br from-sage-100 to-ocean-100 shadow-soft ring-1 ring-sage-900/5 lg:aspect-[4/5]"
-              >
-                <span className="font-display text-6xl font-semibold tracking-wide text-sage-400">
-                  LJN
-                </span>
-              </div>
+              <Image
+                src="/lisa.jpg"
+                alt="Lisa Jefferson Norman"
+                width={522}
+                height={823}
+                priority
+                className="aspect-square w-full overflow-hidden rounded-3xl object-cover object-top shadow-soft ring-1 ring-sage-900/5 lg:aspect-[4/5]"
+              />
               <figcaption className="mt-3 text-center">
                 <p className="font-display text-xl font-semibold text-sage-800">
                   {site.practitioner.name}

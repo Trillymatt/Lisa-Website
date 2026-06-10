@@ -22,7 +22,7 @@ const body = Nunito_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} | Counseling for Mind, Body & Spirit`,
+    default: `${site.name} | Healing Blooms where Hope is Planted`,
     template: `%s | ${site.shortName}`,
   },
   description:

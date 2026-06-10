@@ -55,6 +55,19 @@ export function SiteFooter() {
             </li>
             <li className="text-sage-200">{site.address}</li>
           </ul>
+
+          {/* Personal signature */}
+          <div className="mt-7 border-t border-sage-700 pt-5">
+            <p className="font-display text-lg italic text-sage-100">
+              I&rsquo;m here to help.
+            </p>
+            <p className="mt-1 text-sm font-semibold text-white">
+              {site.practitioner.name}
+            </p>
+            <p className="text-xs uppercase tracking-wider text-sage-300">
+              {site.practitioner.credentials}
+            </p>
+          </div>
         </div>
       </div>
 

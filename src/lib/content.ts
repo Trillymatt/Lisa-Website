@@ -9,8 +9,7 @@
 export const site = {
   name: "Above All Else Counseling and Wellness Center",
   shortName: "Above All Else",
-  tagline:
-    "Counseling that cares for your heart, mind, and faith, at a pace that feels right for you.",
+  tagline: "Healing Blooms where Hope is Planted.",
   // TODO: replace any remaining placeholder contact details.
   email: "Aboveallelsetherapy@lisanormantherapy.com",
   phone: "(555) 123-4567", // TODO
@@ -64,24 +63,53 @@ export type Service = {
  */
 export const services: Service[] = [
   {
+    name: "Biblical Counseling",
+    description:
+      "Find hope, healing, and direction through God's truth and wisdom.",
+  },
+  {
     name: "Individual Counseling",
     description:
-      "A space that's just yours. We'll work through anxiety, depression, grief, big life changes, or whatever's weighing on you, one honest conversation at a time.",
+      "Break free from anxiety, stress, grief, and emotional barriers holding you back.",
   },
   {
-    name: "Couples & Post-Marital Counseling",
+    name: "Couples Counseling",
     description:
-      "When talking has gotten hard, I'll help you find your way back to each other. Better communication, more trust, and a little more grace for one another.",
+      "Reconnect, rebuild trust, and create the relationship you've been longing for.",
   },
   {
-    name: "Family Counseling & Conflict Resolution",
+    name: "Family Counseling",
     description:
-      "Families are complicated, and that's okay. I'll help everyone feel heard and work through the hard stuff together, without anyone being the problem.",
+      "Restore peace, strengthen bonds, and cultivate healthier family relationships.",
   },
   {
-    name: "Family Vision Casting",
+    name: "Conflict Resolution",
     description:
-      "A guided series to help your family name a shared direction and grow toward it together, with purpose and a plan you can keep.",
+      "Transform tension into understanding with practical communication tools.",
+  },
+  {
+    name: "Pre-Marital Counseling",
+    description: "Build a marriage on a solid foundation before saying “I do.”",
+  },
+  {
+    name: "Post-Marital Counseling",
+    description:
+      "Move beyond hurt, restore connection, and strengthen your marriage.",
+  },
+  {
+    name: "Co-Parenting Counseling",
+    description:
+      "Create stability, cooperation, and healthier outcomes for your children.",
+  },
+  {
+    name: "Group Counseling",
+    description:
+      "Experience healing, support, and encouragement alongside others on a similar journey.",
+  },
+  {
+    name: "Discipleship & Inner Healing",
+    description:
+      "Overcome spiritual wounds, deepen your faith, and walk in freedom and purpose.",
   },
 ];
 

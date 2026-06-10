@@ -41,7 +41,7 @@ export default function ServicesPage() {
         <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
           <Reveal>
             <h2 className="text-center font-display text-3xl font-semibold text-ocean-800 sm:text-4xl">
-              Rate Menu
+              Service / Rate Menu
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-center text-sage-700">
               No hidden fees, no fine print &mdash; just clear, upfront rates.

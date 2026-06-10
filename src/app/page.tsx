@@ -14,12 +14,12 @@ export default function Home() {
       <section className="mx-auto max-w-3xl px-5 py-20 sm:px-8">
         <Reveal>
           <h2 className="text-center font-display text-3xl font-semibold text-ocean-800 sm:text-4xl">
-            I&rsquo;m so glad you&rsquo;re here, because here is where healing
-            begins
+            Your next step, made simple
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-center text-sage-700">
-            At Above All Else Counseling and Wellness Center &mdash; virtual and
-            in-person sessions available.
+            Everyone deserves a place to share what matters and be truly heard.
+            Here&rsquo;s what you can do right from this site, whenever
+            you&rsquo;re ready.
           </p>
         </Reveal>
 

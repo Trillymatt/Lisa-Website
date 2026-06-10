@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
-import { CtaButton } from "@/components/ui";
+import { useEffect, useState, useSyncExternalStore } from "react";
+import { setHeroVideoActive } from "@/lib/hero-video-store";
 
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
@@ -45,6 +45,13 @@ export function Hero() {
   // slow file never leaves us with unreadable text.
   const [videoActive, setVideoActive] = useState(false);
 
+  // Keep the transparent site header in sync (it flips to light text while
+  // footage is behind it), and reset when leaving the homepage.
+  useEffect(() => {
+    setHeroVideoActive(videoActive);
+    return () => setHeroVideoActive(false);
+  }, [videoActive]);
+
   // Light text once the video is visibly playing; otherwise the dark palette
   // over the calm gradient fallback.
   const eyebrow = videoActive ? "text-sage-100" : "text-sage-500";
@@ -52,7 +59,9 @@ export function Hero() {
   const body = videoActive ? "text-sage-50" : "text-sage-700";
 
   return (
-    <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-gradient-to-b from-sage-100 via-sage-50 to-sand-50">
+    // -mt-20 pulls the hero up underneath the 80px transparent header so the
+    // nav and the footage blend seamlessly.
+    <section className="relative -mt-20 flex min-h-[92vh] items-center overflow-hidden bg-gradient-to-b from-sage-100 via-sage-50 to-sand-50">
       {/* Soft, slowly drifting accents — the calm fallback behind the words. */}
       <div
         aria-hidden
@@ -67,7 +76,7 @@ export function Hero() {
       {showVideo && (
         <>
           <video
-            className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+            className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 will-change-transform [backface-visibility:hidden] [transform:translateZ(0)] ${
               videoActive ? "opacity-100" : "opacity-0"
             }`}
             autoPlay
@@ -95,7 +104,7 @@ export function Hero() {
         </>
       )}
 
-      <div className="relative mx-auto w-full max-w-5xl px-5 py-24 text-center sm:px-8 sm:py-32">
+      <div className="relative mx-auto w-full max-w-5xl px-5 pb-24 pt-40 text-center sm:px-8 sm:pb-32 sm:pt-48">
         <p
           className={`mb-4 text-sm font-semibold uppercase tracking-[0.22em] animate-rise ${eyebrow}`}
           style={{ animationDelay: "0.05s" }}
@@ -114,15 +123,26 @@ export function Hero() {
           className={`mx-auto mt-6 max-w-2xl text-lg leading-relaxed animate-rise sm:text-xl ${body}`}
           style={{ animationDelay: "0.28s" }}
         >
-          Compassionate counseling for individuals, couples, and families &mdash;
-          a calm, judgment-free space to find your footing and grow whole again.
+          I&rsquo;m so glad you are here, because here is where healing begins
+          &mdash; at Above All Else Counseling and Wellness Center.
+        </p>
+
+        <p
+          className={`mx-auto mt-5 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold uppercase tracking-[0.14em] ring-1 animate-rise ${
+            videoActive
+              ? "bg-white/10 text-sage-50 ring-white/30 backdrop-blur-sm"
+              : "bg-white/70 text-sage-700 ring-sage-200"
+          }`}
+          style={{ animationDelay: "0.34s" }}
+        >
+          <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-gold-400" />
+          Virtual and in-person sessions available
         </p>
 
         <div
           className="mt-10 flex flex-col items-center justify-center gap-4 animate-rise"
           style={{ animationDelay: "0.4s" }}
         >
-          <CtaButton href="/schedule">Request a Consultation</CtaButton>
           <a
             href="/intake"
             className={`text-sm font-semibold underline-offset-4 transition-colors hover:underline focus-visible:underline ${
