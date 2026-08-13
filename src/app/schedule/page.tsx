@@ -60,9 +60,8 @@ export default function SchedulePage() {
               Let&rsquo;s find your time together
             </h2>
             <p className="mx-auto mt-4 max-w-xl leading-relaxed text-sage-700">
-              The Google Calendar booking page is not connected yet. Email me
-              directly or send a contact request, and I&rsquo;ll follow up to
-              arrange a time.
+              The Google Calendar booking page is not connected yet. Email or
+              call me directly, and I&rsquo;ll help arrange a time.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <a
@@ -72,7 +71,7 @@ export default function SchedulePage() {
                 Email Lisa
               </a>
               <CtaButton href="/intake" variant="secondary">
-                Send a Contact Request
+                New Client Options
               </CtaButton>
             </div>
           </div>

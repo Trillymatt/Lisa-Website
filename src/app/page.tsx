@@ -176,7 +176,7 @@ export default function Home() {
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <CtaButton href="/schedule">Schedule Your Appointment</CtaButton>
             <CtaButton href="/intake" variant="secondary">
-              New Client Intake Form
+              New Client Options
             </CtaButton>
           </div>
         </Reveal>

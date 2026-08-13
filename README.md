@@ -12,7 +12,7 @@ and **Tailwind CSS v4**.
 | `/about`     | Mission & values                                                   |
 | `/services`  | Services with clear, upfront pricing                               |
 | `/schedule`  | Google Calendar appointment booking                                |
-| `/intake`    | New client intake questionnaire (posts to `/api/intake`)           |
+| `/intake`    | New-client next steps with live booking, phone, and email links    |
 | `/contact`   | Phone, email, address, and quick-start CTAs                        |
 
 ## Getting started
@@ -54,30 +54,21 @@ After adding permission-given testimonials, set `testimonialsAreApproved` to
 
 `/schedule` opens the practice's Google Calendar Appointment Schedule using
 `site.schedulingUrl`. Paste the public Google booking-page link into
-`content.ts`. Until then, the page shows a working email/intake fallback rather
+`content.ts`. Until then, the page shows working contact options rather
 than linking visitors to a placeholder.
 
-## Intake form
+## New-client page
 
-The form posts to [`src/app/api/intake/route.ts`](src/app/api/intake/route.ts),
-which validates requests and sends them through the Resend HTTPS API. Copy
-`.env.example` to `.env.local` and set `RESEND_API_KEY`, `INTAKE_TO_EMAIL`, and
-`INTAKE_FROM_EMAIL`. Without all three values, the endpoint fails closed and
-the visitor is told to email the practice directly; it never reports a false
-success or writes the intake content to server logs.
-
-Email is not a secure clinical record system. Confirm the practice's privacy
-and compliance requirements before using email to collect protected health
-information; use the practice's EHR/secure intake portal instead when required.
+`/intake` currently offers three working ways to get started: the public Google
+Calendar booking page, click-to-call, and email. A future intake workflow can be
+added when the practice is ready to receive online submissions.
 
 ## Deploying to Railway
 
 1. Push this repo to GitHub and create a Railway project from the repository.
 2. Railway reads `railway.json`, builds the standalone Next.js server, and
    checks `/api/health` before switching traffic to the new deployment.
-3. Add `RESEND_API_KEY`, `INTAKE_TO_EMAIL`, and `INTAKE_FROM_EMAIL` in the
-   service's **Variables** tab. Do not prefix these secrets with `NEXT_PUBLIC_`.
-4. In **Settings → Networking**, generate a Railway domain or attach the
+3. In **Settings → Networking**, generate a Railway domain or attach the
    practice's custom domain.
 
 Railway injects `PORT` automatically; the standalone server reads it at runtime.

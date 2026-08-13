@@ -50,7 +50,7 @@ export const nav = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services & Rates", href: "/services" },
-  { label: "New Client Intake", href: "/intake" },
+  { label: "New Clients", href: "/intake" },
   { label: "Contact", href: "/contact" },
 ] as const;
 

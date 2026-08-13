@@ -78,13 +78,13 @@ export default function ContactPage() {
               Prefer to get started right away?
             </h2>
             <p className="mx-auto mt-3 max-w-lg text-sage-700">
-              Book a session online, or fill out my new client intake form and
-              I&rsquo;ll reach out to you.
+              Book a session online, call, or email. Choose whichever option
+              feels most comfortable for you.
             </p>
             <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <CtaButton href="/schedule">Book a Session</CtaButton>
               <CtaButton href="/intake" variant="secondary">
-                New Client Intake Form
+                New Client Options
               </CtaButton>
             </div>
           </div>
