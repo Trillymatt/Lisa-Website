@@ -10,14 +10,11 @@ export const site = {
   name: "Above All Else Counseling and Wellness Center",
   shortName: "Above All Else",
   tagline: "Healing Blooms where Hope is Planted.",
-  // TODO: replace any remaining placeholder contact details.
   email: "Aboveallelsetherapy@lisanormantherapy.com",
-  phone: "(555) 123-4567", // TODO
-  phoneHref: "tel:+15551234567", // TODO
-  address: "123 Wellness Way, Suite 100, Your City, ST 00000", // TODO — in-person sessions
-  // TODO: paste the practice's Calendly/Acuity scheduling link here.
-  // e.g. "https://calendly.com/your-practice/intro-call"
-  schedulingUrl: "https://calendly.com/your-account/intro-call", // TODO
+  phone: "(940) 784-3884",
+  phoneHref: "tel:+19407843884",
+  address: "Lewisville, Texas",
+  schedulingUrl: "https://calendar.app.google/jMk3Qmp17f9vZ1ns7",
   social: {
     facebook: "", // TODO (optional)
     instagram: "", // TODO (optional)
@@ -34,6 +31,21 @@ export const site = {
   },
 } as const;
 
+/** Only enable scheduling for a real Google Calendar booking-page URL. */
+export const schedulingIsConfigured =
+  (site.schedulingUrl.startsWith("https://calendar.app.google/") ||
+    site.schedulingUrl.startsWith(
+      "https://calendar.google.com/calendar/appointments/",
+    )) &&
+  !site.schedulingUrl.includes("/your-booking-page");
+
+/** Keep the example phone number from becoming a live call button. */
+export const phoneIsConfigured = isConfiguredPhone(site.phoneHref);
+
+function isConfiguredPhone(phoneHref: string) {
+  return phoneHref.startsWith("tel:+") && phoneHref !== "tel:+15551234567";
+}
+
 export const nav = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
@@ -46,8 +58,8 @@ export const nav = [
 export const goals = [
   "Find the kind of counseling that fits where you are right now",
   "See exactly what everything costs, with no surprises",
-  "Hear from people who've sat in the same chair you're in",
-  "Book a time online whenever you're ready",
+  "Learn how faith and whole-person care can fit into the process",
+  "Request a time whenever you're ready",
   "Get a feel for who I am before you ever pick up the phone",
 ] as const;
 
@@ -167,6 +179,10 @@ export const testimonials: Testimonial[] = [
     attribution: "Wellness coaching client",
   },
 ];
+
+// Sample quotes must never be presented as real client endorsements. Replace
+// them with permission-given quotes, then switch this flag to true.
+export const testimonialsAreApproved = false;
 
 /**
  * About-page content for Lisa, in her own (third-person) voice. Faith language

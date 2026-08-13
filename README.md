@@ -11,7 +11,7 @@ and **Tailwind CSS v4**.
 | `/`          | Home — hero, mission, values, services preview, testimonials, CTAs |
 | `/about`     | Mission & values                                                   |
 | `/services`  | Services with clear, upfront pricing                               |
-| `/schedule`  | Online appointment booking (embedded Calendly)                     |
+| `/schedule`  | Google Calendar appointment booking                                |
 | `/intake`    | New client intake questionnaire (posts to `/api/intake`)           |
 | `/contact`   | Phone, email, address, and quick-start CTAs                        |
 
@@ -30,8 +30,8 @@ Almost all copy lives in one file: **[`src/lib/content.ts`](src/lib/content.ts)*
 Search it for `TODO` — every placeholder is marked. Update:
 
 - **Business details** — name, email, phone, address.
-- **`schedulingUrl`** — your Calendly (or Acuity) booking link. This powers the
-  "Book a Session" buttons and the embedded scheduler on `/schedule`.
+- **`schedulingUrl`** — the public Google Calendar Appointment Schedule link.
+  This powers the "Book a Session" buttons and booking page on `/schedule`.
 - **`services`** — service names, descriptions, and pricing.
 - **`testimonials`** — real, permission-given client quotes.
 - **`values`** / mission copy (the mission paragraphs are in
@@ -46,27 +46,38 @@ Swap the hex values once the official brand colors are confirmed.
 Replace the favicon at `src/app/favicon.ico`, and (optionally) add an
 `src/app/opengraph-image.png` for nice social-share previews.
 
+Placeholder phone details and sample testimonials are automatically hidden.
+After adding permission-given testimonials, set `testimonialsAreApproved` to
+`true` in `content.ts`.
+
 ## Online scheduling
 
-`/schedule` embeds Calendly inline using `site.schedulingUrl`. Just paste the
-real Calendly event link into `content.ts`. To use **Acuity** instead, swap the
-embed snippet in [`src/components/calendly-embed.tsx`](src/components/calendly-embed.tsx).
+`/schedule` opens the practice's Google Calendar Appointment Schedule using
+`site.schedulingUrl`. Paste the public Google booking-page link into
+`content.ts`. Until then, the page shows a working email/intake fallback rather
+than linking visitors to a placeholder.
 
 ## Intake form
 
 The form posts to [`src/app/api/intake/route.ts`](src/app/api/intake/route.ts),
-which currently validates and logs submissions server-side. Before launch, wire
-up delivery (see the TODO at the top of that file). Easiest options:
+which validates requests and sends them through the Resend HTTPS API. Copy
+`.env.example` to `.env.local` and set `RESEND_API_KEY`, `INTAKE_TO_EMAIL`, and
+`INTAKE_FROM_EMAIL`. Without all three values, the endpoint fails closed and
+the visitor is told to email the practice directly; it never reports a false
+success or writes the intake content to server logs.
 
-- **Resend** (email) — copy `.env.example` to `.env.local`, fill in the keys,
-  and send the payload to the practice inbox.
-- **Formspree** — point the form at Formspree and delete the API route.
+Email is not a secure clinical record system. Confirm the practice's privacy
+and compliance requirements before using email to collect protected health
+information; use the practice's EHR/secure intake portal instead when required.
 
-## Deploying (recommended: Vercel)
+## Deploying to Railway
 
-1. Push this repo to GitHub.
-2. Import it at [vercel.com/new](https://vercel.com/new) — it auto-detects Next.js.
-3. Add any env vars from `.env.example` in the Vercel dashboard.
-4. Deploy, then point your custom domain at it.
+1. Push this repo to GitHub and create a Railway project from the repository.
+2. Railway reads `railway.json`, builds the standalone Next.js server, and
+   checks `/api/health` before switching traffic to the new deployment.
+3. Add `RESEND_API_KEY`, `INTAKE_TO_EMAIL`, and `INTAKE_FROM_EMAIL` in the
+   service's **Variables** tab. Do not prefix these secrets with `NEXT_PUBLIC_`.
+4. In **Settings → Networking**, generate a Railway domain or attach the
+   practice's custom domain.
 
-Hosting fits comfortably in a free/low-cost tier.
+Railway injects `PORT` automatically; the standalone server reads it at runtime.

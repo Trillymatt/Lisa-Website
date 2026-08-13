@@ -32,9 +32,9 @@ function usePrefersReducedMotion() {
  *  3. The visitor prefers reduced motion → the video is never requested; they
  *     get the still gradient and a single, centered value band.
  *
- * To use a real clip, drop a file at `public/hero.mp4` (with a matching
- * first-frame still at `public/hero-poster.jpg`). Keep it short (~10–20s),
- * slow, muted-friendly, and compressed to a few MB.
+ * To use a real clip, replace `public/hero.webm` (with a matching first-frame
+ * still at `public/hero-poster.jpg`). Keep it short (~10–20s), slow,
+ * muted-friendly, and compressed to a few MB.
  * TODO: the bundled `public/hero.webm` is a low-res placeholder — replace it.
  */
 export function Hero() {
@@ -88,9 +88,6 @@ export function Hero() {
             aria-hidden
             onPlaying={() => setVideoActive(true)}
           >
-            {/* mp4 is listed first so a future real clip is preferred; the webm
-                is the current placeholder. The browser plays the first it can. */}
-            <source src="/hero.mp4" type="video/mp4" />
             <source src="/hero.webm" type="video/webm" />
           </video>
           {/* Scrim: darkens the footage so light text stays readable on any
@@ -138,22 +135,6 @@ export function Hero() {
           <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-gold-400" />
           Virtual and in-person sessions available
         </p>
-
-        <div
-          className="mt-10 flex flex-col items-center justify-center gap-4 animate-rise"
-          style={{ animationDelay: "0.4s" }}
-        >
-          <a
-            href="/intake"
-            className={`text-sm font-semibold underline-offset-4 transition-colors hover:underline focus-visible:underline ${
-              videoActive
-                ? "text-sage-100 hover:text-white"
-                : "text-ocean-600 hover:text-ocean-700"
-            }`}
-          >
-            New here? Start with a free 15-minute call &rarr;
-          </a>
-        </div>
       </div>
 
       {/* Subtle value band — the Planting Seeds nod. Easy to remove: delete

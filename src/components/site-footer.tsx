@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { nav, site } from "@/lib/content";
+import { nav, phoneIsConfigured, site } from "@/lib/content";
 
 export function SiteFooter() {
   return (
@@ -45,14 +45,16 @@ export function SiteFooter() {
                 {site.email}
               </a>
             </li>
-            <li>
-              <a
-                href={site.phoneHref}
-                className="text-sage-100 transition-colors hover:text-white"
-              >
-                {site.phone}
-              </a>
-            </li>
+            {phoneIsConfigured && (
+              <li>
+                <a
+                  href={site.phoneHref}
+                  className="text-sage-100 transition-colors hover:text-white"
+                >
+                  {site.phone}
+                </a>
+              </li>
+            )}
             <li className="text-sage-200">{site.address}</li>
           </ul>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { services } from "@/lib/content";
+import { services, site } from "@/lib/content";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -47,15 +47,24 @@ export function IntakeForm() {
         </h2>
         <p className="mx-auto mt-3 max-w-md text-sage-700">
           I&rsquo;ve received your information and will be in touch soon. If
-          your need is urgent, please call me directly or, in a crisis, call or
-          text 988.
+          your need is urgent, this form is not monitored for emergencies. In a
+          crisis, call or text 988.
         </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-5"
+      aria-busy={status === "submitting"}
+    >
+      <div hidden aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label className={labelClass} htmlFor="name">
@@ -160,8 +169,17 @@ export function IntakeForm() {
       </div>
 
       {status === "error" && (
-        <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
-          {error}
+        <p
+          role="alert"
+          className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700"
+        >
+          {error}{" "}
+          <a
+            href={`mailto:${site.email}`}
+            className="font-semibold underline underline-offset-2"
+          >
+            Email Lisa instead.
+          </a>
         </p>
       )}
 
@@ -174,9 +192,9 @@ export function IntakeForm() {
       </button>
 
       <p className="text-xs leading-relaxed text-sage-500">
-        Your information is kept private and used only to contact you about
-        care. This form is not for emergencies — if you are in crisis, call or
-        text 988.
+        This form is used only to respond to your request. Please do not include
+        medical records, diagnoses, or other highly sensitive details. This
+        form is not for emergencies — if you are in crisis, call or text 988.
       </p>
     </form>
   );
