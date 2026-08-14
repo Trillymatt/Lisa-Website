@@ -72,3 +72,24 @@ added when the practice is ready to receive online submissions.
    practice's custom domain.
 
 Railway injects `PORT` automatically; the standalone server reads it at runtime.
+The standalone server binds `0.0.0.0`, so Railway's `/api/health` check can
+reach it.
+
+### Why Tailwind and TypeScript are in `dependencies`
+
+Railway builds with `NODE_ENV=production` set, which makes `npm ci` skip
+`devDependencies`. Anything `next build` actually needs must therefore live in
+`dependencies`, not `devDependencies` — otherwise the build dies with
+`Cannot find module '@tailwindcss/postcss'` while compiling `globals.css`.
+
+That is why `tailwindcss`, `@tailwindcss/postcss`, `typescript`, and the
+`@types/*` packages sit in `dependencies`. **Do not "tidy" them back into
+`devDependencies`** — it will break the deploy. This costs nothing at runtime:
+`output: "standalone"` traces only the modules the server actually imports, so
+these never reach the deployed bundle.
+
+`eslint` and `eslint-config-next` stay in `devDependencies` because `next build`
+does not run lint.
+
+Node is pinned to 22 via `engines.node` and `.node-version` so the builder
+cannot drift onto a version older than Next 16's `>=20.9.0` floor.
