@@ -158,11 +158,11 @@ export default function AboutPage() {
             Come as you are
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sage-700">
-            Booking takes a couple of minutes, and there&rsquo;s a free call if
-            you&rsquo;d rather just talk first.
+            Booking takes a couple of minutes. If you have questions before
+            choosing a time, you&rsquo;re welcome to reach out first.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <CtaButton href="/schedule">Request a Consultation</CtaButton>
+            <CtaButton href="/schedule">View Available Times</CtaButton>
             <CtaButton href="/contact" variant="secondary">
               Contact Me
             </CtaButton>

@@ -2,7 +2,13 @@ import Link from "next/link";
 import { CtaButton } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 import { Hero } from "@/components/hero";
-import { goals, services, testimonials, values } from "@/lib/content";
+import {
+  goals,
+  services,
+  testimonials,
+  testimonialsAreApproved,
+  values,
+} from "@/lib/content";
 
 export default function Home() {
   return (
@@ -120,40 +126,42 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="bg-sage-800 text-sage-50">
-        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
-          <Reveal>
-            <h2 className="text-center font-display text-3xl font-semibold text-white sm:text-4xl">
-              In their words
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-center text-sage-200">
-              A few notes from people I&rsquo;ve had the privilege of working
-              with.
-            </p>
-          </Reveal>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {testimonials.map((t, i) => (
-              <Reveal key={t.quote} delay={i * 90}>
-                <figure className="relative flex h-full flex-col rounded-3xl bg-sage-700/50 p-7 ring-1 ring-white/5">
-                  <span
-                    aria-hidden
-                    className="font-display text-6xl leading-none text-gold-400/60"
-                  >
-                    &ldquo;
-                  </span>
-                  <blockquote className="-mt-4 flex-1 text-lg leading-relaxed text-sage-50">
-                    {t.quote}
-                  </blockquote>
-                  <figcaption className="mt-5 text-sm font-medium text-gold-400">
-                    &mdash; {t.attribution}
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
+      {/* Testimonials only render after the content owner approves them. */}
+      {testimonialsAreApproved && (
+        <section className="bg-sage-800 text-sage-50">
+          <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
+            <Reveal>
+              <h2 className="text-center font-display text-3xl font-semibold text-white sm:text-4xl">
+                In their words
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl text-center text-sage-200">
+                A few notes from people I&rsquo;ve had the privilege of working
+                with.
+              </p>
+            </Reveal>
+            <div className="mt-12 grid gap-6 md:grid-cols-3">
+              {testimonials.map((t, i) => (
+                <Reveal key={t.quote} delay={i * 90}>
+                  <figure className="relative flex h-full flex-col rounded-3xl bg-sage-700/50 p-7 ring-1 ring-white/5">
+                    <span
+                      aria-hidden
+                      className="font-display text-6xl leading-none text-gold-400/60"
+                    >
+                      &ldquo;
+                    </span>
+                    <blockquote className="-mt-4 flex-1 text-lg leading-relaxed text-sage-50">
+                      {t.quote}
+                    </blockquote>
+                    <figcaption className="mt-5 text-sm font-medium text-gold-400">
+                      &mdash; {t.attribution}
+                    </figcaption>
+                  </figure>
+                </Reveal>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Final CTA */}
       <section className="mx-auto max-w-3xl px-5 py-20 text-center sm:px-8">
@@ -168,7 +176,7 @@ export default function Home() {
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <CtaButton href="/schedule">Schedule Your Appointment</CtaButton>
             <CtaButton href="/intake" variant="secondary">
-              New Client Intake Form
+              New Client Options
             </CtaButton>
           </div>
         </Reveal>

@@ -90,7 +90,7 @@ export default function ServicesPage() {
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <CtaButton href="/schedule">Book a Session</CtaButton>
             <CtaButton href="/intake" variant="secondary">
-              Start with the Intake Form
+              New Client Options
             </CtaButton>
           </div>
         </Reveal>
