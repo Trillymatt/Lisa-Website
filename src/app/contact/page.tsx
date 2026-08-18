@@ -1,14 +1,23 @@
 import type { Metadata } from "next";
 import { PageHero, CtaButton } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
-import { phoneIsConfigured, site } from "@/lib/content";
+import { ContactForm } from "@/components/contact-form";
+import { CrisisNote } from "@/components/crisis-note";
+import { pageMetadata } from "@/lib/page-metadata";
+import {
+  contactFormIsConfigured,
+  phoneIsConfigured,
+  site,
+  telehealth,
+} from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact",
   description: phoneIsConfigured
-    ? "Get in touch with Above All Else Counseling and Wellness Center by phone or email, or schedule an appointment online."
+    ? "Get in touch with Above All Else Counseling and Wellness Center by phone or email, or schedule an appointment online. Online sessions available across Texas."
     : "Get in touch with Above All Else Counseling and Wellness Center by email or request an appointment online.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (
@@ -65,12 +74,29 @@ export default function ContactPage() {
                 <PinIcon />
               </span>
               <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-sage-500">
-                In-Person Sessions
+                {telehealth.offered ? "Online & In Person" : "In-Person Sessions"}
               </p>
               <p className="mt-1 text-sage-700">{site.address}</p>
+              {telehealth.offered && (
+                <p className="mt-1 text-sm text-sage-600">
+                  or by secure video anywhere in{" "}
+                  {telehealth.statesServed.join(", ")}
+                </p>
+              )}
             </div>
           </Reveal>
         </div>
+
+        {/*
+          Deliberately not wrapped in <Reveal>: this is the page's primary
+          conversion path, and it should never depend on a scroll observer
+          firing before someone can see it.
+        */}
+        {contactFormIsConfigured && (
+          <div className="mt-12">
+            <ContactForm />
+          </div>
+        )}
 
         <Reveal delay={120}>
           <div className="mt-12 rounded-3xl bg-ocean-50 p-8 text-center shadow-soft ring-1 ring-ocean-900/5">
@@ -90,10 +116,7 @@ export default function ContactPage() {
           </div>
         </Reveal>
 
-        <p className="mt-10 text-center text-sm text-sage-600">
-          If you are experiencing a mental health emergency, please call 911 or
-          call/text the 988 Suicide &amp; Crisis Lifeline.
-        </p>
+        <CrisisNote className="mt-12" />
       </section>
     </>
   );

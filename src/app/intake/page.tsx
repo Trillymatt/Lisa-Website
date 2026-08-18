@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { CtaButton, PageHero } from "@/components/ui";
-import { site } from "@/lib/content";
+import { CrisisNote } from "@/components/crisis-note";
+import { firstSession, site, telehealth } from "@/lib/content";
+import { pageMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "New Clients",
   description:
-    "Start counseling with Above All Else Counseling and Wellness Center by booking online, calling, or emailing Lisa.",
-};
+    "Start counseling with Above All Else Counseling and Wellness Center by booking online, calling, or emailing Lisa. Online sessions across Texas or in person in Lewisville.",
+  path: "/intake",
+});
 
 export default function IntakePage() {
   return (
@@ -28,6 +32,7 @@ export default function IntakePage() {
           <p className="mx-auto mt-4 max-w-xl leading-relaxed text-sage-700">
             View Lisa&rsquo;s current 60-minute appointment times, or reach out
             directly if you have a question before booking.
+            {telehealth.offered && ` ${telehealth.short}`}
           </p>
 
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -49,11 +54,45 @@ export default function IntakePage() {
           </div>
         </div>
 
-        <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-relaxed text-sage-600">
-          This website is not monitored for emergencies. If you are in crisis,
-          call or text 988. For an immediate life-threatening emergency, call
-          911.
-        </p>
+        {/* What the first hour is actually like — the most common reason people hesitate. */}
+        <div className="mt-12">
+          <h2 className="text-center font-display text-2xl font-semibold text-ocean-800">
+            What happens after you book
+          </h2>
+          <ol className="mt-8 grid gap-5 sm:grid-cols-2">
+            {firstSession.map((step, i) => (
+              <li
+                key={step.title}
+                className="rounded-3xl bg-white p-6 shadow-soft ring-1 ring-sage-900/5"
+              >
+                <span
+                  aria-hidden
+                  className="font-display text-2xl font-semibold text-gold-400"
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-2 font-display text-lg font-semibold text-sage-700">
+                  {step.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-sage-700">
+                  {step.description}
+                </p>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-6 text-center text-sm text-sage-600">
+            Still have a question?{" "}
+            <Link
+              href="/faq"
+              className="font-semibold text-ocean-600 underline decoration-ocean-300 underline-offset-2 hover:text-ocean-700"
+            >
+              Read the FAQ
+            </Link>
+            .
+          </p>
+        </div>
+
+        <CrisisNote className="mt-12" />
       </section>
     </>
   );

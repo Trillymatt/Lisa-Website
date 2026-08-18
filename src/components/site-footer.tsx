@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { nav, phoneIsConfigured, site } from "@/lib/content";
+import { nav, phoneIsConfigured, site, telehealth } from "@/lib/content";
 
 export function SiteFooter() {
   return (
@@ -56,6 +56,9 @@ export function SiteFooter() {
               </li>
             )}
             <li className="text-sage-200">{site.address}</li>
+            {telehealth.offered && (
+              <li className="text-sage-200">{telehealth.short}</li>
+            )}
           </ul>
 
           {/* Personal signature */}
@@ -74,15 +77,38 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-sage-700">
-        <div className="mx-auto max-w-6xl px-5 py-5 text-xs text-sage-300 sm:px-8">
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-5 text-xs text-sage-300 sm:px-8">
           <p>
-            &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
-          </p>
-          <p className="mt-1">
             This website is for informational purposes and is not a substitute
-            for professional medical advice or crisis care. If you are in
-            crisis, call or text 988 (Suicide &amp; Crisis Lifeline).
+            for professional medical advice or crisis care. It is not monitored
+            for emergencies &mdash; if you are in crisis, call or text{" "}
+            <a
+              href="tel:988"
+              className="font-semibold text-sage-100 underline underline-offset-2 hover:text-white"
+            >
+              988
+            </a>{" "}
+            (Suicide &amp; Crisis Lifeline), or call{" "}
+            <a
+              href="tel:911"
+              className="font-semibold text-sage-100 underline underline-offset-2 hover:text-white"
+            >
+              911
+            </a>{" "}
+            in an emergency.
           </p>
+          <div className="flex flex-col gap-2 border-t border-sage-700/60 pt-3 sm:flex-row sm:items-center sm:justify-between">
+            <p>
+              &copy; {new Date().getFullYear()} {site.name}. All rights
+              reserved.
+            </p>
+            <Link
+              href="/privacy"
+              className="text-sage-300 underline underline-offset-2 transition-colors hover:text-white"
+            >
+              Privacy Policy
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

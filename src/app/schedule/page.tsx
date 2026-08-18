@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import { PageHero, CtaButton } from "@/components/ui";
-import { schedulingIsConfigured, site } from "@/lib/content";
+import { CrisisNote } from "@/components/crisis-note";
+import { pageMetadata } from "@/lib/page-metadata";
+import { schedulingIsConfigured, site, telehealth } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Schedule an Appointment",
   description: schedulingIsConfigured
-    ? "Book your counseling appointment online with Above All Else Counseling and Wellness Center. Choose a time that works for you."
+    ? "Book your counseling appointment online with Above All Else Counseling and Wellness Center. Online across Texas or in person in Lewisville."
     : "Request a counseling appointment with Above All Else Counseling and Wellness Center in Lewisville, TX.",
-};
+  path: "/schedule",
+});
 
 export default function SchedulePage() {
   return (
@@ -34,6 +37,7 @@ export default function SchedulePage() {
             <p className="mx-auto mt-4 max-w-xl leading-relaxed text-sage-700">
               View Lisa&rsquo;s current availability and reserve a time through
               the secure Google Calendar booking page.
+              {telehealth.offered && ` ${telehealth.short}`}
             </p>
             <div className="mt-8">
               <CtaButton href={site.schedulingUrl} external>
@@ -76,6 +80,8 @@ export default function SchedulePage() {
             </div>
           </div>
         )}
+
+        <CrisisNote className="mt-12" />
       </section>
     </>
   );
