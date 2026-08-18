@@ -154,8 +154,29 @@ added when the practice is ready to receive online submissions.
    custom domain is attached (see **Environment variables**), then redeploy.
 
 Railway injects `PORT` automatically; the standalone server reads it at runtime.
-The standalone server binds `0.0.0.0`, so Railway's `/api/health` check can
-reach it.
+
+### Why `npm start` goes through `scripts/start.mjs`
+
+Next's generated `server.js` binds to `process.env.HOSTNAME || '0.0.0.0'`.
+Containers — Docker, and therefore Railway — set `HOSTNAME` to the container's
+ID, so the server tries to bind to a name DNS has never heard of and dies on
+startup:
+
+```
+⨯ Failed to start server
+Error: getaddrinfo ENOTFOUND a3f9c2b1d4e5
+```
+
+Nothing is then listening, and Railway's proxy serves **"Application failed to
+respond"** even though the build and deploy both succeeded — a confusing failure,
+because every stage in the dashboard is green.
+
+[`scripts/start.mjs`](scripts/start.mjs) forces `HOSTNAME=0.0.0.0` before
+launching the server, which is what a container behind a proxy always wants.
+Set `HOST` if you ever need to bind somewhere specific.
+
+**Don't change `start` back to `node .next/standalone/server.js`** — it works
+locally (where `HOSTNAME` is usually unset) and fails only once deployed.
 
 ### Why Tailwind and TypeScript are in `dependencies`
 
