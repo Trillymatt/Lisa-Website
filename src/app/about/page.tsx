@@ -3,12 +3,14 @@ import Image from "next/image";
 import { PageHero, CtaButton } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 import { about, values, site } from "@/lib/content";
+import { pageMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About Lisa",
   description:
     "Meet Lisa Jefferson Norman, founder of Above All Else Counseling and Wellness Center in Lewisville, TX — a counselor with 15+ years walking alongside individuals, couples, and families.",
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

@@ -3,10 +3,11 @@ import { CtaButton } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 import { Hero } from "@/components/hero";
 import {
+  firstSession,
   goals,
+  priceLabelFor,
   services,
-  testimonials,
-  testimonialsAreApproved,
+  telehealth,
   values,
 } from "@/lib/content";
 
@@ -94,6 +95,7 @@ export default function Home() {
               </h2>
               <p className="mt-3 max-w-xl text-sage-700">
                 Real support for wherever you are right now.
+                {telehealth.offered && ` ${telehealth.short}`}
               </p>
             </div>
             <Link
@@ -119,6 +121,9 @@ export default function Home() {
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-sage-700">
                     {service.description}
                   </p>
+                  <p className="mt-4 text-sm font-semibold text-ocean-700">
+                    {priceLabelFor(service) ?? "Rate on request"}
+                  </p>
                 </div>
               </div>
             </Reveal>
@@ -126,42 +131,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials only render after the content owner approves them. */}
-      {testimonialsAreApproved && (
-        <section className="bg-sage-800 text-sage-50">
-          <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
-            <Reveal>
-              <h2 className="text-center font-display text-3xl font-semibold text-white sm:text-4xl">
-                In their words
-              </h2>
-              <p className="mx-auto mt-4 max-w-xl text-center text-sage-200">
-                A few notes from people I&rsquo;ve had the privilege of working
-                with.
-              </p>
-            </Reveal>
-            <div className="mt-12 grid gap-6 md:grid-cols-3">
-              {testimonials.map((t, i) => (
-                <Reveal key={t.quote} delay={i * 90}>
-                  <figure className="relative flex h-full flex-col rounded-3xl bg-sage-700/50 p-7 ring-1 ring-white/5">
+      {/*
+        What the first session is actually like. This stands where a
+        testimonials section normally would — see the note on `firstSession` in
+        content.ts for why this practice doesn't publish client quotes.
+      */}
+      <section className="bg-sage-800 text-sage-50">
+        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
+          <Reveal>
+            <h2 className="text-center font-display text-3xl font-semibold text-white sm:text-4xl">
+              What your first session looks like
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-center text-sage-200">
+              Not knowing what to expect is the hardest part of reaching out. So
+              here is exactly how it goes.
+            </p>
+          </Reveal>
+          <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {firstSession.map((step, i) => (
+              <li key={step.title} className="h-full">
+                <Reveal delay={i * 90} className="h-full">
+                  <div className="flex h-full flex-col rounded-3xl bg-sage-700/50 p-7 ring-1 ring-white/5">
                     <span
                       aria-hidden
-                      className="font-display text-6xl leading-none text-gold-400/60"
+                      className="font-display text-3xl font-semibold text-gold-400"
                     >
-                      &ldquo;
+                      {String(i + 1).padStart(2, "0")}
                     </span>
-                    <blockquote className="-mt-4 flex-1 text-lg leading-relaxed text-sage-50">
-                      {t.quote}
-                    </blockquote>
-                    <figcaption className="mt-5 text-sm font-medium text-gold-400">
-                      &mdash; {t.attribution}
-                    </figcaption>
-                  </figure>
+                    <h3 className="mt-3 font-display text-xl font-semibold text-white">
+                      {step.title}
+                    </h3>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-sage-100">
+                      {step.description}
+                    </p>
+                  </div>
                 </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+              </li>
+            ))}
+          </ol>
+          {telehealth.offered && (
+            <Reveal delay={120}>
+              <p className="mx-auto mt-10 max-w-2xl text-center text-sage-200">
+                {telehealth.long}
+              </p>
+            </Reveal>
+          )}
+        </div>
+      </section>
 
       {/* Final CTA */}
       <section className="mx-auto max-w-3xl px-5 py-20 text-center sm:px-8">
