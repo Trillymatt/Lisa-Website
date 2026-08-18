@@ -33,27 +33,18 @@ function stripTrailingSlash(value: string) {
 export const siteUrl = resolveSiteUrl();
 
 /**
- * True when we fell through to localhost — i.e. neither env var was present.
+ * True when we fell through to localhost — i.e. no public origin is known yet.
  *
- * This matters because `siteUrl` is baked in at BUILD time (most pages are
- * statically prerendered), so a production build without either variable would
- * ship localhost canonical tags and an un-indexable robots.txt. Railway exposes
- * service variables to the build, so setting `NEXT_PUBLIC_SITE_URL` there is
- * enough — but the warning below makes a miss visible in the build log instead
- * of silently sinking the site's SEO weeks later.
+ * This is a normal, expected state before a domain is attached, not an error.
+ * The build succeeds either way; the site simply keeps itself out of search
+ * results until it has a real address to point crawlers at.
+ *
+ * Note that `siteUrl` is baked in at BUILD time, because most pages are
+ * statically prerendered. Railway injects `RAILWAY_PUBLIC_DOMAIN` as soon as a
+ * domain exists, so generating one is usually all that's needed — but either
+ * way, a change of address requires a redeploy, not just a restart.
  */
 export const siteUrlIsPlaceholder = siteUrl.startsWith("http://localhost");
-
-if (siteUrlIsPlaceholder && process.env.NODE_ENV === "production") {
-  console.warn(
-    "\n[site-url] WARNING: neither NEXT_PUBLIC_SITE_URL nor RAILWAY_PUBLIC_DOMAIN " +
-      "was set at build time.\n" +
-      "           Canonical URLs, the sitemap, and social previews will point at " +
-      "localhost, and\n" +
-      "           robots.txt will block all crawlers. Set NEXT_PUBLIC_SITE_URL in " +
-      "Railway and rebuild.\n",
-  );
-}
 
 /** Absolute URL for a site-relative path, e.g. `absoluteUrl("/about")`. */
 export function absoluteUrl(path: string) {

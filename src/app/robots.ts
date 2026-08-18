@@ -14,6 +14,16 @@ export default function robots(): MetadataRoute.Robots {
   const noindexRequested = process.env.NEXT_PUBLIC_NOINDEX === "1";
 
   if (noindexRequested || siteUrlIsPlaceholder) {
+    if (siteUrlIsPlaceholder && !noindexRequested) {
+      // Logged here rather than at module scope in site-url.ts, because that
+      // module is imported by every static-generation worker and would repeat
+      // the message once per worker. robots.txt is generated exactly once.
+      console.info(
+        "[site-url] No public domain yet — building with localhost URLs and a " +
+          "no-index robots.txt. Generate a Railway domain (or set " +
+          "NEXT_PUBLIC_SITE_URL) and redeploy to publish.",
+      );
+    }
     return { rules: { userAgent: "*", disallow: "/" } };
   }
 
