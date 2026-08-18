@@ -86,28 +86,39 @@ Placeholder phone details are automatically hidden until configured.
 
 ## Environment variables
 
-All optional — the site builds and deploys without any of them, and features
-that depend on one stay hidden rather than half-working.
+**None of these are required.** The site builds and deploys with no variables
+set at all; anything that depends on one stays hidden rather than half-working,
+so you can add them whenever you're ready.
 
-| Variable                            | Effect                                                                                            |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL`              | Canonical origin, e.g. `https://lisanormantherapy.com`. **Set this in Railway.** See warning below. |
-| `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` | Formspree (or similar) endpoint. Without it the `/contact` form is hidden entirely.                |
-| `NEXT_PUBLIC_NOINDEX`               | Set to `1` on a staging environment to block all crawlers.                                          |
+| Variable                            | If you set it                                                       | If you don't                                                    |
+| ----------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`              | Used as the canonical origin, e.g. `https://lisanormantherapy.com`. | Falls back to the Railway domain — see below. Nothing breaks.     |
+| `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` | The `/contact` form appears and posts there.                        | The form is hidden; the page keeps its email/phone/booking cards. |
+| `NEXT_PUBLIC_NOINDEX`               | Set to `1` to block all crawlers (for a staging environment).       | Normal indexing rules apply.                                      |
 
-> **These are read at _build_ time**, because the pages are statically
-> prerendered. Railway exposes service variables to the build, so setting them
-> in the service is enough — but changing one requires a **redeploy**, not just
-> a restart. If neither URL variable is present, the build prints a loud
-> `[site-url] WARNING` and falls back to `localhost`, which would leave
-> canonical tags and the sitemap pointing at the wrong place.
+### You probably don't need to set the site URL
 
-Indexing is **allowed by default** on any real deployed origin, including
-Railway's own `*.up.railway.app` domain, so the site can never be accidentally
-invisible to Google because a variable was missed. Blocking is opt-in via
-`NEXT_PUBLIC_NOINDEX`.
+Railway injects `RAILWAY_PUBLIC_DOMAIN` as soon as the service has a domain, and
+the site picks that up on its own. So:
 
-### Setting up the contact form
+- **No domain generated yet** — the build succeeds, the site runs, and
+  `robots.txt` returns `Disallow: /`. That's intentional: there's no public
+  address to send search engines to yet. The build logs one informational
+  `[site-url]` line saying so.
+- **Railway domain generated** — canonical URLs, the sitemap, and social
+  previews all switch to that domain automatically, and indexing turns on. No
+  variable needed.
+- **Custom domain attached** — set `NEXT_PUBLIC_SITE_URL` to it so search
+  engines treat the custom domain as canonical rather than the Railway one.
+
+> These values are read at **build** time, because the pages are statically
+> prerendered. So attaching a domain or changing a variable needs a
+> **redeploy**, not just a restart.
+
+### Adding the contact form later
+
+Nothing to do until you want it. `/contact` works today with email, phone, and
+booking links; the form simply isn't rendered. When you're ready:
 
 1. Create a form at [formspree.io](https://formspree.io) pointed at Lisa's inbox.
 2. Set `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` in Railway to the endpoint URL.
@@ -138,8 +149,9 @@ added when the practice is ready to receive online submissions.
    checks `/api/health` before switching traffic to the new deployment.
 3. In **Settings → Networking**, generate a Railway domain or attach the
    practice's custom domain.
-4. Set `NEXT_PUBLIC_SITE_URL` to that domain (see **Environment variables**)
-   and redeploy, so canonical URLs and the sitemap are correct.
+4. Generating a Railway domain is enough to make the site publicly indexable —
+   it configures its own URLs from it. Only set `NEXT_PUBLIC_SITE_URL` once a
+   custom domain is attached (see **Environment variables**), then redeploy.
 
 Railway injects `PORT` automatically; the standalone server reads it at runtime.
 The standalone server binds `0.0.0.0`, so Railway's `/api/health` check can
