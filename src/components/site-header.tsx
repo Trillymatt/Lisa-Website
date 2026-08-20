@@ -15,8 +15,8 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // True once the homepage hero footage is actually painting frames.
-  const videoActive = useSyncExternalStore(
+  // True once the homepage hero is showing media (poster still or footage).
+  const heroMedia = useSyncExternalStore(
     subscribeHeroVideo,
     getHeroVideoActive,
     getHeroVideoServerSnapshot,
@@ -31,10 +31,10 @@ export function SiteHeader() {
 
   // On the homepage the header sits transparent on top of the hero until the
   // visitor scrolls (the hero pulls itself up underneath with -mt-20). It only
-  // flips to light text once the video — with its dark scrim — is behind it,
+  // flips to light text once hero media — with its dark scrim — is behind it,
   // so words stay readable on the gradient fallback too.
   const overlay = pathname === "/" && !scrolled && !open;
-  const light = overlay && videoActive;
+  const light = overlay && heroMedia;
 
   return (
     <header

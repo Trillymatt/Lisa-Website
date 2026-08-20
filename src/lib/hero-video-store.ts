@@ -1,8 +1,8 @@
 /**
- * Tiny shared store: whether the homepage hero video is actually painting
- * frames. The transparent site header subscribes so it only switches to
- * light-on-dark text once real footage (and its dark scrim) is behind it —
- * on the calm gradient fallback the header keeps its dark palette.
+ * Tiny shared store: whether the homepage hero is showing media — the poster
+ * still or the footage itself. The transparent site header subscribes so it
+ * only switches to light-on-dark text once that media (and its dark scrim) is
+ * behind it — on the calm gradient fallback the header keeps its dark palette.
  */
 let active = false;
 const listeners = new Set<() => void>();
