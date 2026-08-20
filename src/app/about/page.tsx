@@ -26,14 +26,19 @@ export default function AboutPage() {
         <div className="grid gap-10 lg:grid-cols-[5fr_7fr] lg:items-start lg:gap-14">
           {/* Portrait */}
           <Reveal>
-            <figure className="mx-auto max-w-[15rem] lg:sticky lg:top-24 lg:max-w-none">
+            {/* The portrait is a tight headshot with almost no room above the
+                hair, so any square/4:5 crop clips either the head or the chin.
+                It is shown at its own 522x823 ratio instead and capped in width
+                so the column doesn't turn into one tall photo. */}
+            <figure className="mx-auto max-w-[16rem] sm:max-w-[18rem] lg:sticky lg:top-24 lg:max-w-[21rem]">
               <Image
                 src="/lisa.jpg"
                 alt="Lisa Jefferson Norman"
                 width={522}
                 height={823}
-                priority
-                className="aspect-square w-full overflow-hidden rounded-3xl object-cover object-top shadow-soft ring-1 ring-sage-900/5 lg:aspect-[4/5]"
+                loading="eager"
+                fetchPriority="high"
+                className="h-auto w-full rounded-3xl shadow-soft ring-1 ring-sage-900/5"
               />
               <figcaption className="mt-3 text-center">
                 <p className="font-display text-xl font-semibold text-sage-800">
